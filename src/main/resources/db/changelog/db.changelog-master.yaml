@@ -3,6 +3,7 @@ databaseChangeLog:
   - changeSet:
       id: 1
       author: ilyutsik
+      comment: "Create tables"
       changes:
         - createTable:
             tableName: users
@@ -15,7 +16,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: username
+                  name: login
                   type: varchar(50)
                   constraints:
                     unique: true
@@ -25,6 +26,70 @@ databaseChangeLog:
                   type: varchar(512)
                   constraints:
                     nullable: false
+
+        - createTable:
+            tableName: locations
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: latitude
+                  type: decimal
+                  constraints:
+                    nullable: false
+              - column:
+                  name: longitude
+                  type: decimal
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: locations
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_locations_users
+
+        - createTable:
+            tableName: sessions
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expires_at
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: sessions
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_sessions_users
+
   - changeSet:
       id: 2
       author: ilyutsik
@@ -34,22 +99,78 @@ databaseChangeLog:
             tableName: users
             columns:
               - column:
-                  name: username
+                  name: login
                   value: "admin"
               - column:
                   name: password
-                  value: "admin"
+                  value: "$2a$10$KIXQ9sHkB9DBykm1tT1eOONBjCz1PEO64TSZ9sEdFkeOrOZaSizTG"
         - insert:
             tableName: users
             columns:
               - column:
-                  name: username
-                  value: "guest"
+                  name: login
+                  value: "ilyutsik"
               - column:
                   name: password
-                  value: "guest"
+                  value: "$2a$10$br.npcwRuCqW8ZXENYIYQukDqPdC2xse4f5igJunSKM.0tNx5dMki"
+
+        - insert:
+            tableName: locations
+            columns:
+              - column:
+                  name: name
+                  value: "Minsk"
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: latitude
+                  value: 132.228
+              - column:
+                  name: longitude
+                  value: 03123.678
+        - insert:
+            tableName: locations
+            columns:
+              - column:
+                  name: name
+                  value: "Moscow"
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: latitude
+                  value: 12232.228
+              - column:
+                  name: longitude
+                  value: 0311232323.678
+
+        - insert:
+            tableName: sessions
+            columns:
+              - column:
+                  name: id
+                  value: 550e8400-e29b-41d4-a716-446655440001
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: expires_at
+                  value: 2025-06-29T20:32:42.855349700
+        - insert:
+            tableName: sessions
+            columns:
+              - column:
+                    name: id
+                    value: 550e8400-e29b-41d4-a716-446655440000
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: expires_at
+                  value: 2023-06-29T16:13:55.655349700
 
       rollback:
         - delete:
             tableName: users
-            where: username in ('admin', 'guest')
+            where: username in ('admin', 'ilyutsik')

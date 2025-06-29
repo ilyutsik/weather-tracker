@@ -1,8 +1,10 @@
 package org.ilyutsik.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 
+@Data
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,6 +16,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String login;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
+
 }
