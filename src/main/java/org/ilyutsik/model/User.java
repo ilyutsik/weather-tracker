@@ -2,6 +2,7 @@ package org.ilyutsik.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.ilyutsik.util.PasswordUtil;
 
 
 @Data
@@ -18,5 +19,12 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @PrePersist
+    public void hashPassword() {
+        if (password != null) {
+            password = PasswordUtil.hashPassword(password);
+        }
+    }
 
 }
