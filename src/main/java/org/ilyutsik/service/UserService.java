@@ -8,8 +8,8 @@ import org.ilyutsik.model.User;
 import org.ilyutsik.repository.UserRepository;
 import org.ilyutsik.util.PasswordUtil;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void registerUser(String login, String password) throws UserAlreadyExistsException {
+    public void register(String login, String password) throws UserAlreadyExistsException {
         Optional<User> optionalUser = userRepository.getUserByLogin(login);
         if (optionalUser.isPresent()) {
             throw new UserAlreadyExistsException(login);
@@ -28,7 +28,7 @@ public class UserService {
         userRepository.save(newUser);
     }
 
-    public void authenticateUser(String login, String password) throws UserNotFoundException, InvalidPasswordException {
+    public User authenticate(String login, String password) throws UserNotFoundException, InvalidPasswordException {
         Optional<User> optionalUser = userRepository.getUserByLogin(login);
         if (optionalUser.isEmpty()) {
             throw new UserNotFoundException(login);
@@ -36,6 +36,7 @@ public class UserService {
         if (!PasswordUtil.matchPassword(password, optionalUser.get().getPassword())) {
             throw new InvalidPasswordException();
         }
+        return optionalUser.get();
     }
 
 }

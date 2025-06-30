@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+<header th:fragment="siteHeader">
+    <div class="container">
+        <nav class="nav-buttons">
+            <a th:if="${isLogin}" href="/home" class="btn-home">Home</a>
+            <a th:if="${isLogin}" href="/logout" class="btn-logout">Logout</a>
+            <a th:unless="${isLogin}" href="/authorization" class="btn-auth">Login</a>
+            <a th:unless="${isLogin}" href="/registration" class="btn-reg">Registration</a>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

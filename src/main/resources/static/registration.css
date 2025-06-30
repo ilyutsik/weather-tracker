@@ -1,11 +1,8 @@
-/* registration.css */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
     margin: 0;
 }
 
@@ -14,8 +11,9 @@ body {
     padding: 30px 40px;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+    width: 350px;
+    margin: 250px auto; /* центрируем по горизонтали, и отступ сверху */
+
 }
 
 .register-form {

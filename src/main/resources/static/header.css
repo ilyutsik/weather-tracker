@@ -1,0 +1,51 @@
+header {
+    background-color: skyblue;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-buttons .btn-home, .btn-auth, .btn-logout, .btn-reg {
+    text-decoration: none;
+    color: black;
+    background-color: cornflowerblue;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    font-size: 16px;
+}
+
+.nav-buttons .btn-home:hover {
+    background-color: #a3b0b3;
+    color: #f0f4f5;
+}
+
+.nav-buttons .btn-reg:hover {
+    background-color: #4a90e2;
+    color: #f0f4f5;
+}
+
+.nav-buttons .btn-auth:hover {
+    background-color: #4CAF50;
+    color: #f0f4f5;
+}
+
+.nav-buttons .btn-logout:hover {
+    background-color: #e74c3c;
+    color: #f0f4f5;
+}
+

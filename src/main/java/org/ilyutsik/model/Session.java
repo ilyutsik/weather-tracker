@@ -21,13 +21,5 @@ public class Session {
     @Column(nullable = false)
     private LocalDateTime expiresAt;
 
-    @PrePersist
-    public void generateUUID() {
-        if (id == null) {
-            id = UUID.randomUUID();
-        }
-    }
-
 }
-
 
