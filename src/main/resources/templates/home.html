@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="header.css">
 </head>
 <body>
-<div th:insert="header :: siteHeader"></div>
+<div th:insert="~{header :: siteHeader}"></div>
 <h1 th:text="'Hello, ' + ${user.login}"></h1>
 </body>
 </html>

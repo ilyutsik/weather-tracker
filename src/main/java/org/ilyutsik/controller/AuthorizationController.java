@@ -38,8 +38,6 @@ public class AuthorizationController extends BaseController {
             User user = userService.authenticate(login, password);
             Cookie cookie =  sessionService.startSession(user);
             response.addCookie(cookie);
-            System.out.println(cookie.getValue());
-
             return "redirect:/home";
         } catch (UserNotFoundException | InvalidPasswordException ex) {
             model.addAttribute("login", login);
