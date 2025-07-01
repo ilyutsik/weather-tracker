@@ -2,7 +2,7 @@ package org.ilyutsik.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.ilyutsik.util.PasswordUtil;
+import org.ilyutsik.util.PasswordEncoder;
 
 
 @Data
@@ -23,7 +23,7 @@ public class User {
     @PrePersist
     public void hashPassword() {
         if (password != null) {
-            password = PasswordUtil.hashPassword(password);
+            password = PasswordEncoder.hash(password);
         }
     }
 

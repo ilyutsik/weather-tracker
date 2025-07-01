@@ -6,7 +6,7 @@ import org.ilyutsik.exeption.UserAlreadyExistsException;
 import org.ilyutsik.exeption.UserNotFoundException;
 import org.ilyutsik.model.User;
 import org.ilyutsik.repository.UserRepository;
-import org.ilyutsik.util.PasswordUtil;
+import org.ilyutsik.util.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -33,7 +33,7 @@ public class UserService {
         if (optionalUser.isEmpty()) {
             throw new UserNotFoundException(login);
         }
-        if (!PasswordUtil.matchPassword(password, optionalUser.get().getPassword())) {
+        if (!PasswordEncoder.match(password, optionalUser.get().getPassword())) {
             throw new InvalidPasswordException();
         }
         return optionalUser.get();
