@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.ilyutsik.service.SessionService;
+import org.ilyutsik.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,11 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/logout")
-@RequiredArgsConstructor
-public class LogoutController {
+public class LogoutController extends BaseController{
 
-    private final SessionService sessionService;
+    public LogoutController(SessionService sessionService, UserService userService) {
+        super(sessionService, userService);
+    }
 
     @GetMapping
     public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -28,8 +30,8 @@ public class LogoutController {
                 .filter(cookie -> "session-token".equals(cookie.getName())).findFirst();
 
         if (tokenCookie.isPresent()) {
-            Cookie deleteCookie = sessionService.logout(tokenCookie.get().getValue());
-            response.addCookie(deleteCookie);
+            Cookie emptyCookie = sessionService.logout(tokenCookie.get().getValue());
+            response.addCookie(emptyCookie);
         }
         return "redirect:/authorization";
     }

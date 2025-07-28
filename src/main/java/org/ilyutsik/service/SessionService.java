@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class SessionService {
 
-    private static final Integer SESSION_SECONDS_LIFETIME = 60;
+    private static final Integer SESSION_SECONDS_LIFETIME = 6_000_000;
 
     private final SessionRepository sessionRepository;
 
@@ -54,11 +54,11 @@ public class SessionService {
     @Transactional
     public Cookie logout(String sessionToken) {
         sessionRepository.deleteById(UUID.fromString(sessionToken));
-        Cookie deleteCookie = new Cookie("session-token", sessionToken);
-        deleteCookie.setPath("/");
-        deleteCookie.setHttpOnly(true);
-        deleteCookie.setMaxAge(0);
-        return deleteCookie;
+        Cookie emptyCookie = new Cookie("session-token", sessionToken);
+        emptyCookie.setPath("/");
+        emptyCookie.setHttpOnly(true);
+        emptyCookie.setMaxAge(0);
+        return emptyCookie;
     }
 
 }

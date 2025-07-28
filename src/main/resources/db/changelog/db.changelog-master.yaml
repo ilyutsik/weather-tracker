@@ -161,8 +161,8 @@ databaseChangeLog:
             tableName: sessions
             columns:
               - column:
-                    name: id
-                    value: 550e8400-e29b-41d4-a716-446655440000
+                  name: id
+                  value: 550e8400-e29b-41d4-a716-446655440000
               - column:
                   name: user_id
                   value: 1

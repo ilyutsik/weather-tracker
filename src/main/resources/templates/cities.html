@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/cities.css">
+    <link rel="stylesheet" href="/header.css">
+</head>
+<body>
+<div th:insert="~{header :: siteHeader}"></div>
+<div class="weather-container">
+    <h1 th:if="${isListEmpty}" th:text="'Not found city ' + ${city}"></h1>
+    <div class="weather-card" th:each="weather : ${cityWeatherList}">
+        <h2 th:text="${weather.name} + ', ' + ${weather.sys.country}"></h2>
+        <p th:text="'Temperature: ' + ${weather.main.temp} + '°C (feels like ' + ${weather.main.feelsLike} + '°C)'"></p>
+        <p th:text="'Humidity: ' + ${weather.main.humidity} + '%'"></p>
+        <p th:text="'Condition: ' + ${weather.weather[0].description}"></p>
+        <form action="/home/add-location" method="post">
+            <input type="hidden" name="name" th:value="${weather.name}">
+            <input type="hidden" name="lat" th:value="${weather.coord.lat}">
+            <input type="hidden" name="lon" th:value="${weather.coord.lon}">
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

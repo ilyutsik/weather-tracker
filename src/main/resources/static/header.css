@@ -1,23 +1,43 @@
+/* Общие стили для body и header */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Единый шрифт */
+}
+
+/* Шапка */
 header {
     background-color: skyblue;
     padding: 15px 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
 
+/* Контейнер с выравниванием */
 .container {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    padding-right: 10px;
+    padding: 0 10px;
 }
 
+/* Левая часть шапки (приветствие) */
+.header-left {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Кнопки справа */
 .nav-buttons {
     display: flex;
+    align-items: center;
     gap: 15px;
 }
 
-.nav-buttons .btn-home, .btn-auth, .btn-logout, .btn-reg {
+/* Стили всех кнопок */
+.nav-buttons a,
+.nav-buttons button {
     text-decoration: none;
     color: black;
     background-color: cornflowerblue;
@@ -27,8 +47,11 @@ header {
     transition: background-color 0.3s ease;
     user-select: none;
     font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
+/* Ховеры */
 .nav-buttons .btn-home:hover {
     background-color: #a3b0b3;
     color: #f0f4f5;
@@ -49,3 +72,16 @@ header {
     color: #f0f4f5;
 }
 
+/* Стили формы поиска */
+.find-city-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.find-city-form input[type="text"] {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

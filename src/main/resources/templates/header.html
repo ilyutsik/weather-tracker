@@ -7,11 +7,19 @@
 <body>
 <header th:fragment="siteHeader">
     <div class="container">
+        <div class="header-left">
+            <div th:if="${isLogin}" th:text="'Hello, ' + ${user.login}"></div>
+        </div>
         <nav class="nav-buttons">
+            <form th:if="${isLogin}" class="find-city-form" action="/home/find-city" method="get">
+                <input type="text" name="city" placeholder="City" required>
+                <button type="submit">Find</button>
+            </form>
             <a th:if="${isLogin}" href="/home" class="btn-home">Home</a>
-            <a th:if="${isLogin}" href="/logout" class="btn-logout">Logout</a>
-            <a th:unless="${isLogin}" href="/authorization" class="btn-auth">Login</a>
-            <a th:unless="${isLogin}" href="/registration" class="btn-reg">Registration</a>
+            <a th:if="${isLogin}" href="/logout" class="btn-logout">Sign out</a>
+            <a th:unless="${isLogin}" href="/authorization" class="btn-auth">Sign in</a>
+            <a th:unless="${isLogin}" href="/registration" class="btn-reg">Sign up</a>
+
         </nav>
     </div>
 </header>

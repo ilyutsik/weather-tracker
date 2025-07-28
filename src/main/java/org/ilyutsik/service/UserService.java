@@ -8,6 +8,8 @@ import org.ilyutsik.model.User;
 import org.ilyutsik.repository.UserRepository;
 import org.ilyutsik.util.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 
@@ -17,19 +19,19 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    @Transactional
     public void register(String login, String password) throws UserAlreadyExistsException {
-        Optional<User> optionalUser = userRepository.getUserByLogin(login);
+        Optional<User> optionalUser = userRepository.findUserByLogin(login);
         if (optionalUser.isPresent()) {
             throw new UserAlreadyExistsException(login);
         }
-        User newUser = new User();
-        newUser.setLogin(login);
-        newUser.setPassword(password);
+        User newUser = User.builder().login(login).password(password).build();
         userRepository.save(newUser);
     }
 
+    @Transactional
     public User authenticate(String login, String password) throws UserNotFoundException, InvalidPasswordException {
-        Optional<User> optionalUser = userRepository.getUserByLogin(login);
+        Optional<User> optionalUser = userRepository.findUserByLogin(login);
         if (optionalUser.isEmpty()) {
             throw new UserNotFoundException(login);
         }

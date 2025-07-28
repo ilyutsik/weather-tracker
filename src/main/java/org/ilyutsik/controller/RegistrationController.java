@@ -2,23 +2,22 @@ package org.ilyutsik.controller;
 
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
+import jakarta.servlet.http.HttpServletResponse;
 import org.ilyutsik.exeption.UserAlreadyExistsException;
+import org.ilyutsik.service.SessionService;
 import org.ilyutsik.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 @RequestMapping("/registration")
-@RequiredArgsConstructor
 public class RegistrationController extends BaseController {
 
-    private final UserService userService;
+    public RegistrationController(SessionService sessionService, UserService userService) {
+        super(sessionService, userService);
+    }
 
     @GetMapping()
     public String registrationGet(Model model) {
@@ -26,11 +25,12 @@ public class RegistrationController extends BaseController {
     }
 
     @PostMapping()
-    public String registrationPost(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, HttpServletRequest request, Model model) {
-        isLoginUser(request, model);
+    public String registrationPost(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, HttpServletRequest request, HttpServletResponse response, Model model) {
+        checkUserAuthorization(request, model);
         if (!password.equals(repeatPassword)) {
             model.addAttribute("login", login);
             model.addAttribute("error", "Passwords do not match");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return "registration";
         }
         try {
@@ -38,6 +38,7 @@ public class RegistrationController extends BaseController {
             return "redirect:/authorization";
         } catch (UserAlreadyExistsException ex) {
             model.addAttribute("error", ex.getMessage());
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
             return "registration";
         }
     }
