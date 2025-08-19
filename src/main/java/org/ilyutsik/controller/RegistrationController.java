@@ -3,7 +3,7 @@ package org.ilyutsik.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.ilyutsik.exeption.UserAlreadyExistsException;
+import org.ilyutsik.exception.UserAlreadyExistsException;
 import org.ilyutsik.service.SessionService;
 import org.ilyutsik.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class RegistrationController extends BaseController {
 
     @PostMapping()
     public String registrationPost(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, HttpServletRequest request, HttpServletResponse response, Model model) {
-        checkUserAuthorization(request, model);
+        checkAuthorization(request, model);
         if (!password.equals(repeatPassword)) {
             model.addAttribute("login", login);
             model.addAttribute("error", "Passwords do not match");

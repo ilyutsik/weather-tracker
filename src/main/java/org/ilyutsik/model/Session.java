@@ -1,14 +1,19 @@
 package org.ilyutsik.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "sessions")
+@Table(name = "sessions",
+        indexes = {@Index(name = "idx_expires", columnList = "expiresAt")})
 public class Session {
 
     @Id

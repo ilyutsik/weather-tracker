@@ -3,8 +3,8 @@ package org.ilyutsik.service;
 import jakarta.servlet.http.Cookie;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.ilyutsik.exeption.SessionExpiredException;
-import org.ilyutsik.exeption.SessionNotFoundException;
+import org.ilyutsik.exception.SessionExpiredException;
+import org.ilyutsik.exception.SessionNotFoundException;
 import org.ilyutsik.model.Session;
 import org.ilyutsik.model.User;
 import org.ilyutsik.repository.SessionRepository;
@@ -12,13 +12,15 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 
 @Service
 @RequiredArgsConstructor
 public class SessionService {
 
-    private static final Integer SESSION_SECONDS_LIFETIME = 6_000_000;
+    private static final Integer SESSION_SECONDS_LIFETIME = 600_000;
 
     private final SessionRepository sessionRepository;
 
@@ -52,7 +54,7 @@ public class SessionService {
     }
 
     @Transactional
-    public Cookie logout(String sessionToken) {
+    public Cookie delete(String sessionToken) {
         sessionRepository.deleteById(UUID.fromString(sessionToken));
         Cookie emptyCookie = new Cookie("session-token", sessionToken);
         emptyCookie.setPath("/");

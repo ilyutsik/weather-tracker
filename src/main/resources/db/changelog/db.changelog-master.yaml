@@ -174,3 +174,14 @@ databaseChangeLog:
         - delete:
             tableName: users
             where: username in ('admin', 'ilyutsik')
+
+  - changeSet:
+      id: 3
+      author: ilyutsik
+      changes:
+        - createIndex:
+            indexName: idx_expires
+            tableName: sessions
+            columns:
+              - column:
+                  name: expires_at

@@ -3,7 +3,6 @@ package org.ilyutsik.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.ilyutsik.service.SessionService;
 import org.ilyutsik.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -30,7 +29,7 @@ public class LogoutController extends BaseController{
                 .filter(cookie -> "session-token".equals(cookie.getName())).findFirst();
 
         if (tokenCookie.isPresent()) {
-            Cookie emptyCookie = sessionService.logout(tokenCookie.get().getValue());
+            Cookie emptyCookie = sessionService.delete(tokenCookie.get().getValue());
             response.addCookie(emptyCookie);
         }
         return "redirect:/authorization";

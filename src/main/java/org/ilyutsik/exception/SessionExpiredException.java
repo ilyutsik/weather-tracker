@@ -1,4 +1,4 @@
-package org.ilyutsik.exeption;
+package org.ilyutsik.exception;
 
 public class SessionExpiredException extends RuntimeException {
     public SessionExpiredException() {

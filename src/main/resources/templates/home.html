@@ -9,18 +9,38 @@
 <body>
 <div th:insert="~{header :: siteHeader}"></div>
 <h1></h1>
+<h1 th:if="${isApiError}" th:text="${apiError}"></h1>
 <div class="weather-container">
-    <div class="weather-card" th:each="location : ${locations}">
-        <h2 th:text="${location.name} + ', ' + ${location.sys.country}"></h2>
-        <p th:text="'Temperature: ' + ${location.main.temp} + '°C (feels like ' + ${location.main.feelsLike} + '°C)'"></p>
-        <p th:text="'Humidity: ' + ${location.main.humidity} + '%'"></p>
-        <p th:text="'Condition: ' + ${location.weather[0].description}"></p>
-        <form action="/home/delete-location" method="post">
-            <input type="hidden" name="name" th:value="${location.name}">
-            <input type="hidden" name="lat" th:value="${location.coord.lat}">
-            <input type="hidden" name="lon" th:value="${location.coord.lon}">
-            <button type="submit">delete</button>
-        </form>
+    <div class="weather-card" th:each="weather : ${locations}">
+        <div class="card-header">
+            <h2 th:text="${weather.name} + ', ' + ${weather.sys.country}"></h2>
+        </div>
+
+        <div class="card-main">
+            <img th:src="'http://openweathermap.org/img/wn/' + ${weather.weather[0].icon} + '@2x.png'" alt="Weather"/>
+            <div class="temp-block">
+                <p class="temp" th:text="${weather.main.temp} + '°C'"></p>
+                <p class="condition" th:text="${weather.weather[0].description}"></p>
+                <p class="feels">feels <span th:text="${weather.main.feelsLike} + '°C'"></span></p>
+            </div>
+        </div>
+
+        <div class="card-details">
+            <div class="detail"><span>🌡</span><span th:text="${weather.main.tempMin} + ' / ' + ${weather.main.tempMax} + '°C'"></span></div>
+            <div class="detail"><span>💧</span><span th:text="${weather.main.humidity} + '%'"></span></div>
+            <div class="detail"><span>🌀</span><span th:text="${weather.main.pressure} + ' hPa'"></span></div>
+            <div class="detail"><span>🌬</span><span th:text="${weather.wind.speed} + ' m/s'"></span></div>
+        </div>
+
+
+        <div class="card-footer">
+            <form action="/home/delete-location" method="post">
+                <input type="hidden" name="name" th:value="${weather.name}">
+                <input type="hidden" name="lat" th:value="${weather.coord.lat}">
+                <input type="hidden" name="lon" th:value="${weather.coord.lon}">
+                <button type="submit">delete</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

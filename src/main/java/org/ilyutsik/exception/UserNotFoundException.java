@@ -1,4 +1,4 @@
-package org.ilyutsik.exeption;
+package org.ilyutsik.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String login) {

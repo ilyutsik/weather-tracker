@@ -1,4 +1,4 @@
-package org.ilyutsik.exeption;
+package org.ilyutsik.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException(String login) {

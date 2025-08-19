@@ -4,7 +4,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.ilyutsik.model.User;
-import org.ilyutsik.service.LocationService;
 import org.ilyutsik.service.SessionService;
 import org.ilyutsik.service.UserService;
 import org.springframework.ui.Model;
@@ -18,7 +17,7 @@ public abstract class BaseController {
     public final SessionService sessionService;
     public final UserService userService;
 
-    public Optional<User> checkUserAuthorization(HttpServletRequest request, Model model) {
+    public Optional<User> checkAuthorization(HttpServletRequest request, Model model) {
         Optional<Cookie> tokenCookie = Optional.empty();
         if (request.getCookies() != null) {
             tokenCookie = Arrays.stream(request.getCookies())

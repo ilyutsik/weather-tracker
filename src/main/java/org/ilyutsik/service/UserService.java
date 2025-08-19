@@ -1,9 +1,9 @@
 package org.ilyutsik.service;
 
 import lombok.RequiredArgsConstructor;
-import org.ilyutsik.exeption.InvalidPasswordException;
-import org.ilyutsik.exeption.UserAlreadyExistsException;
-import org.ilyutsik.exeption.UserNotFoundException;
+import org.ilyutsik.exception.InvalidPasswordException;
+import org.ilyutsik.exception.UserAlreadyExistsException;
+import org.ilyutsik.exception.UserNotFoundException;
 import org.ilyutsik.model.User;
 import org.ilyutsik.repository.UserRepository;
 import org.ilyutsik.util.PasswordEncoder;
