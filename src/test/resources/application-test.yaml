@@ -1,8 +1,11 @@
 app:
   weatherApi: ${WeatherApiKey}
   session:
-    duration: 259200  # 3 days by seconds
+    duration: 5  # 5 seconds
 spring:
+  config:
+    activate:
+      on-profile: test
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres
@@ -10,10 +13,10 @@ spring:
     password: ilyutsik
 
   jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
-    hibernate:
-      ddl-auto: validate
-      default_schema: public
+        default_schema: test_schema

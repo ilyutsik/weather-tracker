@@ -25,8 +25,8 @@ public abstract class BaseController {
 
         }
         if (tokenCookie.isPresent()) {
-            model.addAttribute("isLogin", true);
             User user = sessionService.getUser(tokenCookie.get().getValue());
+            model.addAttribute("isLogin", true);
             model.addAttribute("user", user);
             return Optional.of(user);
         }

@@ -1,6 +1,7 @@
 .weather-container {
+    margin: 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, 210px);
     gap: 20px;
 }
 
@@ -12,7 +13,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 260px; /* фиксированная высота */
+    height: 260px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

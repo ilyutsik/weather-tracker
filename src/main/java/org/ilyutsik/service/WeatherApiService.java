@@ -1,11 +1,12 @@
 package org.ilyutsik.service;
 
-import io.github.cdimascio.dotenv.Dotenv;
+
 import lombok.RequiredArgsConstructor;
 import org.ilyutsik.dto.LocationDto;
 import org.ilyutsik.dto.WeatherDto;
 import org.ilyutsik.exception.LocationNotFoundException;
 import org.ilyutsik.exception.WeatherNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -26,10 +27,8 @@ public class WeatherApiService {
 
     private final int limit = 5;
 
-    Dotenv dotenv = Dotenv.load();
-    private final String apiKey = dotenv.get("API_KEY");
-
-
+    @Value("${app.weatherApi}")
+    private String apiKey;
 
     public List<WeatherDto> getWeatherByCity(String city) {
         List<LocationDto> coordinates = getLocationByCity(city);

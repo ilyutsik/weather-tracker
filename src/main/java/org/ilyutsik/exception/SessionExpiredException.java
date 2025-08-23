@@ -1,7 +1,8 @@
 package org.ilyutsik.exception;
 
-public class SessionExpiredException extends RuntimeException {
+public class SessionExpiredException extends AuthorizationException {
+
     public SessionExpiredException() {
-        super();
+        super("Session expired");
     }
 }

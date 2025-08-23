@@ -10,7 +10,7 @@
 <div th:insert="~{header :: siteHeader}"></div>
 
 <div class="weather-container">
-    <h1 th:if="${isApiError}" th:text="${apiError}"></h1>
+    <h1 th:if="${apiError}" th:text="${apiError}"></h1>
 
     <div class="weather-card" th:each="weather : ${cityWeatherList}">
         <div class="card-header">

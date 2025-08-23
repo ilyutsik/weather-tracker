@@ -3,8 +3,6 @@ package org.ilyutsik.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.ilyutsik.exception.InvalidPasswordException;
-import org.ilyutsik.exception.UserNotFoundException;
 import org.ilyutsik.model.User;
 import org.ilyutsik.service.SessionService;
 import org.ilyutsik.service.UserService;
@@ -32,23 +30,14 @@ public class AuthorizationController extends BaseController {
     @PostMapping
     public String authorizationPost(@RequestParam("login") String login, @RequestParam("password") String password,
                                     Model model, HttpServletRequest request, HttpServletResponse response) {
-        checkAuthorization(request, model);
-        try {
-            User user = userService.authenticate(login, password);
-            Cookie cookie =  sessionService.startSession(user);
-            response.addCookie(cookie);
-            return "redirect:/home";
-        } catch (UserNotFoundException | InvalidPasswordException ex) {
-            if (ex instanceof InvalidPasswordException) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            }
-            if (ex instanceof UserNotFoundException) {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            }
+
             model.addAttribute("login", login);
-            model.addAttribute("error", ex.getMessage());
-            return "authorization";
-        }
+
+            User user = userService.authenticate(login, password);
+            Cookie cookie = sessionService.startSession(user);
+            response.addCookie(cookie);
+
+            return "redirect:/home";
     }
 
 }

@@ -29,14 +29,13 @@ public class LocationService {
     public List<Location> getUserLocations(User user) throws UserNotFoundException {
         Optional<User> optionalUser = userRepository.findUserById(user.getId());
         if (optionalUser.isEmpty()) {
-            // todo
-//            throw new UserNotFoundException(user.getLogin());
+            throw new UserNotFoundException(user.getLogin());
         }
         return locationRepository.findByUserId(user.getId());
     }
 
     @Transactional
-    public void deleteLocation(BigDecimal lat, BigDecimal lon, String name) {
-        locationRepository.deleteByLatitudeAndLongitudeAndName(lat, lon, name);
+    public void deleteLocation(BigDecimal lat, BigDecimal lon, String name, User user) {
+        locationRepository.deleteByLatitudeAndLongitudeAndNameAndUser(lat, lon, name, user);
     }
 }

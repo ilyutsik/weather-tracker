@@ -3,7 +3,6 @@ package org.ilyutsik.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.ilyutsik.dto.WeatherDto;
-import org.ilyutsik.exception.WeatherNotFoundException;
 import org.ilyutsik.model.Location;
 import org.ilyutsik.model.User;
 import org.ilyutsik.service.LocationService;
@@ -40,19 +39,12 @@ public class HomeController extends BaseController {
     @GetMapping
     public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
         Optional<User> optionalUser = checkAuthorization(request, model);
-        if (optionalUser.isEmpty()) {
-            return "redirect:/authorization";
-        }
+        if (optionalUser.isEmpty()) return "redirect:/authorization";
+
         List<Location> locations = locationService.getUserLocations(optionalUser.get());
         List<WeatherDto> locationsDto = new ArrayList<>();
         for (Location location : locations) {
-            try {
-                locationsDto.add(weatherApiService.getWeatherByLocation(location.getName(), location.getLatitude(), location.getLongitude()));
-            } catch (WeatherNotFoundException ignored) {}
-            catch (RuntimeException e) {
-                model.addAttribute("isApiError", true);
-                model.addAttribute("apiError", e.getMessage());
-            }
+            locationsDto.add(weatherApiService.getWeatherByLocation(location.getName(), location.getLatitude(), location.getLongitude()));
         }
         model.addAttribute("locations", locationsDto);
         return "home";
@@ -61,19 +53,11 @@ public class HomeController extends BaseController {
     @GetMapping("/find-city")
     public String find(@RequestParam("city") String city, HttpServletRequest request, Model model) {
         Optional<User> optionalUser = checkAuthorization(request, model);
-        if (optionalUser.isEmpty()) {
-            return "redirect:/authorization";
-        }
-        try {
-            List<WeatherDto> cityWeatherList = weatherApiService.getWeatherByCity(city);
-            model.addAttribute("cityWeatherList", cityWeatherList);
-//        } catch (WeatherNotFoundException e) {
-//            model.addAttribute("isListEmpty", true);
-//            model.addAttribute("city", city);
-        } catch (RuntimeException e) {
-            model.addAttribute("isApiError", true);
-            model.addAttribute("apiError", e.getMessage());
-        }
+        if (optionalUser.isEmpty()) return "redirect:/authorization";
+
+        List<WeatherDto> cityWeatherList = weatherApiService.getWeatherByCity(city);
+        model.addAttribute("cityWeatherList", cityWeatherList);
+
         return "cities";
 
     }
@@ -83,9 +67,7 @@ public class HomeController extends BaseController {
                               @RequestParam("name") String name, HttpServletRequest request, Model model) {
 
         Optional<User> optionalUser = checkAuthorization(request, model);
-        if (optionalUser.isEmpty()) {
-            return "redirect:/authorization";
-        }
+        if (optionalUser.isEmpty()) return "redirect:/authorization";
 
         Location newLocation = Location.builder()
                 .user(optionalUser.get())
@@ -104,11 +86,9 @@ public class HomeController extends BaseController {
                                  @RequestParam("name") String name, HttpServletRequest request, Model model) {
 
         Optional<User> optionalUser = checkAuthorization(request, model);
-        if (optionalUser.isEmpty()) {
-            return "redirect:/authorization";
-        }
+        if (optionalUser.isEmpty()) return "redirect:/authorization";
 
-        locationService.deleteLocation(lat, lon, name);
+        locationService.deleteLocation(lat, lon, name, optionalUser.get());
         return "redirect:/home";
     }
 

@@ -1,6 +1,5 @@
 package org.ilyutsik.service;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.ilyutsik.util.TestConfig;
 import org.ilyutsik.dto.WeatherDto;
 import org.ilyutsik.exception.WeatherNotFoundException;
@@ -164,8 +163,8 @@ class WeatherApiServiceTest {
                 }      \s
                 """;
 
-    Dotenv dotenv = Dotenv.load();
-    private final String apiKey = dotenv.get("API_KEY");
+
+    private final String apiKey = System.getenv("WeatherApiKey");
     String uriGetLocationByCity = "http://api.openweathermap.org/geo/1.0/direct?q=Province%20of%20Turin&limit=5&appid=" + apiKey;
     String uriGetWeatherByLocation = "http://api.openweathermap.org/data/2.5/weather?lat=45.133&lon=7.367&limit=5&units=metric&appid=" + apiKey;
     BigDecimal lat = BigDecimal.valueOf(45.133);
