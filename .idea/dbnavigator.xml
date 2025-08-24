@@ -45,7 +45,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="f59c97e5-e306-4744-9565-15c9b47605c9">
-      <console name="Connection" type="STANDARD" schema="public" session="Main" />
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[create schema test_schema;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -53,7 +53,12 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
+      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/test_schema/tables/sessions" />
+      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/public/tables/sessions" />
       <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/public/tables/users" />
+      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/public/tables/locations" />
+      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/test_schema/tables/users" />
+      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/test_schema/tables/locations" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
@@ -63,13 +68,16 @@
     <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.users" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="pg_catalog.pg_index" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.locations" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.databasechangeloglock" active-filter-id="" />
+    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="test_schema.users" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.databasechangeloglock" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.sessions" active-filter-id="EMPTY_FILTER">
       <filter id="acca7ca2-370f-4260-9a20-b4a31fe72ec2" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="test_schema.locations" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.databasechangelog" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="test_schema.sessions" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

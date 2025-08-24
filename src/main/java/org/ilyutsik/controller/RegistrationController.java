@@ -24,6 +24,16 @@ public class RegistrationController extends BaseController {
 
     @PostMapping()
     public String registrationPost(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, HttpServletRequest request, HttpServletResponse response, Model model) {
+        if (login.length() < 5) {
+            model.addAttribute("apiError", "minimum login length is 5 characters");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "registration";
+        }
+        if (password.length() < 6) {
+            model.addAttribute("apiError", "minimum password length is 5 characters");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "registration";
+        }
         if (!password.equals(repeatPassword)) {
             model.addAttribute("login", login);
             model.addAttribute("apiError", "Passwords do not match");
