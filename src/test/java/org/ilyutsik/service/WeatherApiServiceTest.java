@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +25,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestConfig.class})
+@TestPropertySource(properties = "app.weatherApi=${WeatherApiKey}")
 class WeatherApiServiceTest {
 
     @Autowired
@@ -192,7 +194,6 @@ class WeatherApiServiceTest {
     @Test
     void testGetWeatherByLocationResponseVoidBody() {
         mockServer.expect(requestTo(uriGetWeatherByLocation)).andRespond(withSuccess("", MediaType.APPLICATION_JSON));
-
         assertThrows(WeatherNotFoundException.class,
                 () -> { WeatherDto result = weatherApiService.getWeatherByLocation(cityName, lat, lon); });
 
