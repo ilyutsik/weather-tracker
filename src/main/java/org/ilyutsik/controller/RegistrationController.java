@@ -29,7 +29,7 @@ public class RegistrationController extends BaseController {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return "registration";
         }
-        if (password.length() < 6) {
+        if (password.length() < 5) {
             model.addAttribute("apiError", "minimum password length is 5 characters");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return "registration";
