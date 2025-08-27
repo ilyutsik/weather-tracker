@@ -44,8 +44,8 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="f59c97e5-e306-4744-9565-15c9b47605c9">
-      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[create schema test_schema;]]></console>
+    <connection id="87b2cdca-5dfa-4aad-9595-f33cf53beb9b">
+      <console name="Connection" type="STANDARD" schema="postgres" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -53,31 +53,16 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/test_schema/tables/sessions" />
-      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/public/tables/sessions" />
-      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/public/tables/users" />
-      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/public/tables/locations" />
-      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/test_schema/tables/users" />
-      <object connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" object-ref="schemas/test_schema/tables/locations" />
+      <object connection-id="87b2cdca-5dfa-4aad-9595-f33cf53beb9b" object-ref="schemas/public/tables/sessions" />
+      <object connection-id="87b2cdca-5dfa-4aad-9595-f33cf53beb9b" object-ref="schemas/public/tables/users" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="f59c97e5-e306-4744-9565-15c9b47605c9" />
+    <connection id="87b2cdca-5dfa-4aad-9595-f33cf53beb9b" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.users" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="pg_catalog.pg_index" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.locations" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="test_schema.users" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.databasechangeloglock" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.sessions" active-filter-id="EMPTY_FILTER">
-      <filter id="acca7ca2-370f-4260-9a20-b4a31fe72ec2" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
-        <condition column="id" operator="=" value="" active="true" />
-      </filter>
-    </filter-actions>
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="test_schema.locations" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="public.databasechangelog" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f59c97e5-e306-4744-9565-15c9b47605c9" dataset="test_schema.sessions" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="87b2cdca-5dfa-4aad-9595-f33cf53beb9b" dataset="public.users" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="87b2cdca-5dfa-4aad-9595-f33cf53beb9b" dataset="public.sessions" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -101,13 +86,13 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection source-id="" id="f59c97e5-e306-4744-9565-15c9b47605c9" active="true" signed="true">
+      <connection source-id="" id="87b2cdca-5dfa-4aad-9595-f33cf53beb9b" active="true" signed="true">
         <database>
           <name value="Connection" />
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="14.17" />
+          <database-version value="14.18" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />
