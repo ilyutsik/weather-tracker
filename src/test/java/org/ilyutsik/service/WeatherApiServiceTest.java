@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestConfig.class})
-@TestPropertySource(properties = "app.weatherApi=${WeatherApiKey}")
+@TestPropertySource(properties = "app.weatherApi=${API}")
 class WeatherApiServiceTest {
 
     @Autowired
@@ -165,8 +166,8 @@ class WeatherApiServiceTest {
                 }      \s
                 """;
 
-
-    private final String apiKey = System.getenv("WeatherApiKey");
+    @Value("${app.weatherApi}")
+    private String apiKey;
     String uriGetLocationByCity = "http://api.openweathermap.org/geo/1.0/direct?q=Province%20of%20Turin&limit=5&appid=" + apiKey;
     String uriGetWeatherByLocation = "http://api.openweathermap.org/data/2.5/weather?lat=45.133&lon=7.367&limit=5&units=metric&appid=" + apiKey;
     BigDecimal lat = BigDecimal.valueOf(45.133);

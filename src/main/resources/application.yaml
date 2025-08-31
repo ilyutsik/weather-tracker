@@ -1,5 +1,5 @@
 app:
-  weatherApi: ${WeatherApiKey}
+  weatherApi: ${API}
   session:
     duration: 259200  # 3 days by seconds
 spring:

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   postgres:
@@ -7,6 +7,24 @@ services:
     ports:
       - 5432:5432
     environment:
-      - 'POSTGRES_USER=ilyutsik'
-      - 'POSTGRES_PASSWORD=ilyutsik'
-      - 'POSTGRES_DB=java'
+      POSTGRES_USER: ilyutsik
+      POSTGRES_PASSWORD: ilyutsik
+      POSTGRES_DB: java
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: weather-app
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/java
+      SPRING_DATASOURCE_USERNAME: ilyutsik
+      SPRING_DATASOURCE_PASSWORD: ilyutsik
+      API: ${API_KEY}
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
